@@ -4,15 +4,15 @@ import {
   ComboboxPopover,
   ComboboxList,
   ComboboxOption,
-  ComboboxOptionText,
-} from '@reach/combobox';
-import styles from '@reach/combobox/styles.css';
-import { LinksFunction, useFetcher } from 'remix';
+} from "@reach/combobox";
+import styles from "@reach/combobox/styles.css";
+import { LinksFunction, useFetcher } from "remix";
 
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export default function () {
   const combobox = useFetcher();
+  console.log(combobox.data);
 
   return (
     <combobox.Form method="get" action="/get-options">
@@ -21,9 +21,19 @@ export default function () {
           name="q"
           onChange={(e) => combobox.submit(e.target.form)}
         />
-        <ComboboxPopover>
-          <ComboboxList></ComboboxList>
-        </ComboboxPopover>
+        {combobox.data && (
+          <ComboboxPopover>
+            {combobox.data.sort.length ? (
+              <ComboboxList>
+                {(combobox.data.sort as { name: string }[]).map(
+                  ({ name }, i) => (
+                    <ComboboxOption key={i} value={name} />
+                  )
+                )}
+              </ComboboxList>
+            ) : null}
+          </ComboboxPopover>
+        )}
       </Combobox>
     </combobox.Form>
   );
