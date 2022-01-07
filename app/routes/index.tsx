@@ -7,12 +7,7 @@ export default function Index() {
     <select.Form
       action="/post-selection"
       method="post"
-      onChange={(e) =>
-        select.submit(e.currentTarget, {
-          method: 'post',
-          action: '/post-selection',
-        })
-      }
+      onChange={(e) => select.submit(e.currentTarget)}
     >
       <select name="theme">
         <option>Dark</option>
