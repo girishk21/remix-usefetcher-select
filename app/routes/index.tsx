@@ -18,6 +18,9 @@ export default function Index() {
         <option>Dark</option>
         <option>Light</option>
       </select>
+      <noscript>
+        <button>Submit</button>
+      </noscript>
     </select.Form>
   );
 }
